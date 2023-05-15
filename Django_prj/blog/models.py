@@ -1,6 +1,20 @@
 from django.db import models
+from django.contrib.auth.models import User
+import os
 
-# Create your models here.
+class Category(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+    slug = models.SlugField(max_length=200, unique=True, allow_unicode = True)
+    
+    def __str__(self):
+        return self.name
+    
+    def get_absolute_url(self):
+        return f'/blog/category/{self.slug}/'
+    
+    class Meta:
+        verbose_name_plural = "Categories"#불려지는 이름 수정 
+
 
 class Post(models.Model):
     title = models.CharField(max_length=30)
@@ -18,13 +32,25 @@ class Post(models.Model):
     #해당 데이터가 마지막으로 수정된 날짜와 시간을 자동으로 저장합니다.
     updated_at = models.DateTimeField(auto_now=True)
     # author: 추후 작성 예정
+    
+    author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+
+    category = models.ForeignKey(Category,null=True,blank=True,on_delete=models.SET_NULL)
 
 #__str__() 메소드는 해당 객체를 출력할 때 출력될 문자열을 반환합니다. 
 # 위 코드에서는 [해당 객체의 pk] 제목 형식의 문자열을 반환하도록 구현되어 있습니다.
     def __str__(self):
-        return f'[{self.pk}] {self.title}'
+        return f'[{self.pk}] {self.title} :: {self.author}'
  
  #메소드는 해당 Post 객체의 상세 페이지 URL을 반환하는 메소드입니다. 위 코드에서는 /blog/<게시물번호>/ 
  #형태로 반환하도록 구현되어 있습니다. 이를 urls.py와 연결하여 상세 페이지를 생성할 수 있습니다.
     def get_absolute_url(self):
         return f'/blog/{self.pk}/'
+    
+    def get_file_name(self):
+        return os.path.basename(self.file_upload.name)
+
+    def get_file_ext(self):
+        return self.get_file_name().split('.')[-1]
+    
+    

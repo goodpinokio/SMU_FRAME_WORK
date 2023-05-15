@@ -6,7 +6,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog</title>
+    
+    <title>{% block head_title %}Blog{% endblock %}</title>
 
     <link rel="stylesheet" href="{% static 'blog/bootstrap4/bootstrap.min.css' %}">
 
@@ -21,7 +22,7 @@
  {% include 'blog/navbar.html' %}
     <div class="container my-3">
         <div class="row">
-            <div class="col-md-8 col-lg-9">
+            <div class="col-md-8 col-lg-9" id="main-area">
                 {% block main_content %}
                 {% endblock %}
             </div>
@@ -44,20 +45,15 @@
                     <div class="card-header">Categories</div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-sm-6">
-                                <ul class="list-unstyled mb-0">
-                                    <li><a href="#!">Web Design</a></li>
-                                    <li><a href="#!">HTML</a></li>
-                                    <li><a href="#!">Freebies</a></li>
+                            
+                                <ul>
+
+                                    <li><a href="#!">프로그래밍 ()</a></li>
+                                    <li><a href="#!">문화예술 & 예술 ()</a></li>
+                                    <li><a href="#!">미분류 ()</a></li>
                                 </ul>
-                            </div>
-                            <div class="col-sm-6">
-                                <ul class="list-unstyled mb-0">
-                                    <li><a href="#!">JavaScript</a></li>
-                                    <li><a href="#!">CSS</a></li>
-                                    <li><a href="#!">Tutorials</a></li>
-                                </ul>
-                            </div>
+                           
+                            
                         </div>
                     </div>
                 </div>

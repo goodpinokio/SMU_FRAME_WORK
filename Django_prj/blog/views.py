@@ -32,6 +32,6 @@ class PostList(ListView): #얘는 그냥 post_list 변수를 받는다
 #         }
 #     )
 
-class PostDetail(DetailView): #예는 그냥 post 변수를 받아 온다 
+class PostDetail(DetailView): #=> post_detail.html 자동으로 찾아준다.
     model = Post
-    template_name = 'blog/single_post_detail.html'
+#    template_name = 'blog/single_post_detail.html'
