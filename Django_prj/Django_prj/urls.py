@@ -25,6 +25,7 @@ urlpatterns = [
     path('',include('single_pages.urls')),
     path('blog/',include('blog.urls')),
     path('midterm/',include('midterm.urls')),
+    path('accounts/', include('allauth.urls')),
 ]
 
 
